@@ -1,7 +1,6 @@
 #include <stdio.h>
-void menu(void){
-    printf("menu\n");
-}
+#include "menu.h"
+
 void add_vector(void){
     printf("1\n");
 }
