@@ -1,7 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "menu.h"
 
 void add_vector(void){
+    char str[100]; int f=0;
+    getchar();
+    fgets(str, 102, stdin);
+    for (int i=0; str[i]!='\0'; i++) {
+    }
     printf("1\n");
 }
 void view_vectors(void){
