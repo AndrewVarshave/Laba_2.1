@@ -3,11 +3,6 @@
 #include <string.h>
 #include "string.h"
 
-#define MAX_STRINGS 100
-
-String* strings[MAX_STRINGS];
-int string_count = 0;
-
 void menu() {
     printf("\n=== УПРАВЛЕНИЕ СТРОКАМИ ===\n");
     printf("1. Создать строку\n");
