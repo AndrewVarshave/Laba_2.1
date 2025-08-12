@@ -13,7 +13,7 @@ void print_menu() {
     printf("\n======= MENU ========\n");
     printf("1) Add a new string\n");
     printf("2) Show string(s)\n");
-    printf("3. Concatenation\n");
+    printf("3) Concatenation\n");
     printf("4) Get substring\n");
     printf("5) Find substring\n");
     printf("6) Abort programm\n");
@@ -38,9 +38,9 @@ void create_string() {
     String* s = string_create(input);
     if (s) {
         strings[string_count++] = s;
-        printf("Strind was added with number %d\n", string_count);
+        printf("String was added with number %d\n", string_count);
     } else {
-        printf("Strind wasn't added\n");
+        printf("String wasn't added\n");
     }
 }
 
@@ -105,7 +105,7 @@ void get_substring() {
             strings[string_count++] = sub;
             printf("Substring: \"");
             string_print(sub);
-            printf("\" with numder %d\n", string_count);
+            printf("\" with number %d\n", string_count);
         } else {
             printf("String limit\n");
             string_print(sub);
