@@ -5,6 +5,7 @@
 extern String* strings[];
 extern int string_count;
 
+void run_tests(void);
 void print_menu(void);
 void create_string(void);
 void list_strings(void);

@@ -1,14 +1,14 @@
 #ifndef STRING_H
 #define STRING_H
 
-#include <stdio.h>   // Добавлено для printf
-#include <stdlib.h>  // Добавлено для size_t
-#include <string.h>  // Добавлено для strcspn
+#include <stdio.h>   
+#include <stdlib.h>  
+#include <string.h>  
 
 typedef struct String {
-    char* data;     // Указатель на данные строки
-    size_t length;  // Длина строки
-    size_t capacity; // Емкость буфера
+    char* data;    
+    size_t length;  
+    size_t capacity; 
 } String;
 
 String* string_create(const char* initial);

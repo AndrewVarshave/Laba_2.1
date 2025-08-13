@@ -9,6 +9,7 @@ int main() {
         printf("> Select action: ");
         scanf("%d", &action);
         switch (action) {
+            case 0: run_tests(); break;
             case 1: create_string(); break;
             case 2: list_strings(); break;
             case 3: concat_strings(); break;

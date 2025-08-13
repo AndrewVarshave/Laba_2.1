@@ -1,7 +1,7 @@
 #include "string.h"
 #include <stdio.h>
-#include <ctype.h>  // Для tolower
-#include <stdlib.h> // Для malloc/free
+#include <ctype.h>  
+#include <stdlib.h> 
 
 String* string_create(const char* initial) {
     String* s = (String*)malloc(sizeof(String));

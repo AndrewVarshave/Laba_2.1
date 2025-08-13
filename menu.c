@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include "menu.h"
 #include "string.h"
 
@@ -11,6 +12,7 @@ int string_count = 0;
 
 void print_menu() {
     printf("\n======= MENU ========\n");
+    printf("0) Run tests\n");
     printf("1) Add a new string\n");
     printf("2) Show string(s)\n");
     printf("3) Concatenation\n");
@@ -143,9 +145,96 @@ void find_substring() {
     }
 }
 
+void run_tests() {
+    printf("=== STARTING STRING ADT TESTS ===\n\n");
+    int pass_count = 0, total_tests = 0;
+    #define RUN_TEST(NAME, COND) \
+        do { \
+            total_tests++; \
+            if (COND) { \
+                printf("Test %d: %-50s [PASS]\n", total_tests, NAME); \
+                pass_count++; \
+            } else { \
+                printf("Test %d: %-50s [FAIL]\n", total_tests, NAME); \
+            } \
+        } while (0)
+
+    String* s = string_create("Hello World");
+    
+    String* sub1 = string_substring(s, 0, 5);
+    RUN_TEST("Valid substring (start=0)", 
+        sub1 != NULL && strcmp(sub1->data, "Hello") == 0);
+    
+    String* sub2 = string_substring(s, 6, 11);
+    RUN_TEST("Valid substring (end=length)", 
+        sub2 != NULL && strcmp(sub2->data, "World") == 0);
+    
+    String* sub3 = string_substring(s, 0, 0);
+    RUN_TEST("Empty substring (start=end)", sub3 == NULL);
+    
+    String* sub4 = string_substring(s, 0, s->length);
+    RUN_TEST("Full string substring", 
+        sub4 != NULL && strcmp(sub4->data, "Hello World") == 0);
+    
+    String* sub5 = string_substring(s, 5, 6);
+    RUN_TEST("Single character substring", 
+        sub5 != NULL && strcmp(sub5->data, " ") == 0);
+    
+    String* sub6 = string_substring(s, 10, 5);
+    RUN_TEST("Start > end", sub6 == NULL);
+    
+    String* sub7 = string_substring(s, 0, 100);
+    RUN_TEST("End > length", sub7 == NULL);
+    
+    String* sub8 = string_substring(s, 20, 25);
+    RUN_TEST("Start > length", sub8 == NULL);
+    
+    String* sub9 = string_substring(s, -1, 5);
+    RUN_TEST("Negative start", sub9 == NULL);
+    
+    String* sub10 = string_substring(s, 0, -5);
+    RUN_TEST("Negative end", sub10 == NULL);
+    
+    String* sub11 = string_substring(NULL, 0, 5);
+    RUN_TEST("NULL input", sub11 == NULL);
+    
+    String* empty = string_create("");
+    String* sub12 = string_substring(empty, 0, 0);
+    RUN_TEST("Empty string substring", sub12 == NULL);
+    
+    String* sub13 = string_substring(empty, 0, 1);
+    RUN_TEST("Empty string with invalid indices", sub13 == NULL);
+    
+    String* sub14 = string_substring(s, 0, SIZE_MAX);
+    RUN_TEST("Extremely large end value", sub14 == NULL);
+    
+    String* sub15 = string_substring(s, SIZE_MAX - 10, SIZE_MAX);
+    RUN_TEST("Extremely large start value", sub15 == NULL);
+    
+    String* zero = string_create("A");
+    String* sub16 = string_substring(zero, 0, 0);
+    RUN_TEST("Zero-length substring on single char", sub16 == NULL);
+    
+    String* sub17 = string_substring(zero, 1, 1);
+    RUN_TEST("Start=end=length on single char", sub17 == NULL);
+    
+    string_free(s);
+    string_free(empty);
+    string_free(zero);
+    if (sub1) string_free(sub1);
+    if (sub2) string_free(sub2);
+    if (sub4) string_free(sub4);
+    if (sub5) string_free(sub5);
+    
+    printf("\nTEST SUMMARY:\n");
+    printf("Passed: %d/%d\n", pass_count, total_tests);
+    printf("=== TESTS COMPLETED ===\n");
+}
+
 void cleanup() {
     for (int i = 0; i < string_count; i++) {
         string_free(strings[i]);
     }
     printf("Aborting\n");
 }
+
