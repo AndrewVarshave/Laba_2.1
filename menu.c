@@ -23,15 +23,16 @@ void print_menu() {
 }
 
 void create_string() {
-    if (string_count >= MAX_STRINGS) {
+    if (string_count == MAX_STRINGS) {
         printf("Strings limit\n");
         return;
     }
     
-    char input[1024];
+    char input[256];
     printf("Input string: ");
     getchar();
     if (!fgets(input, sizeof(input), stdin)) {
+        printf("Coudn't read string, try again");
         return;
     }
     
@@ -152,7 +153,7 @@ void run_tests() {
         do { \
             total_tests++; \
             if (COND) { \
-                printf("Test %d: %-50s [PASS]\n", total_tests, NAME); \
+                printf("Test %2d: %-50s [PASS]\n", total_tests, NAME); \
                 pass_count++; \
             } else { \
                 printf("Test %d: %-50s [FAIL]\n", total_tests, NAME); \

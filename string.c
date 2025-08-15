@@ -3,11 +3,11 @@
 #include <ctype.h>  
 #include <stdlib.h> 
 
-String* string_create(const char* initial) {
+String* string_create(const char* string) {
     String* s = (String*)malloc(sizeof(String));
     if (!s) return NULL;
     
-    s->length = strlen(initial);
+    s->length = strlen(string);
     s->capacity = s->length + 1;
     s->data = (char*)malloc(s->capacity);
     
@@ -16,7 +16,7 @@ String* string_create(const char* initial) {
         return NULL;
     }
     
-    strcpy(s->data, initial);
+    strcpy(s->data, string);
     return s;
 }
 
@@ -79,17 +79,18 @@ int string_find(String* haystack, String* needle, int case_sensitive) {
             char c1 = haystack->data[i + j];
             char c2 = needle->data[j];
             
-            if (case_sensitive) {
+            if (case_sensitive==1) {
                 if (c1 != c2) {
                     match = 0;
                     break;
                 }
-            } else {
+            } else if(case_sensitive==0) {
                 if (tolower(c1) != tolower(c2)) {
                     match = 0;
                     break;
                 }
             }
+            else {printf("Wrong case sensitive; "); return -1;}
         }
         if (match) return i;
     }
