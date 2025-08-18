@@ -3,9 +3,9 @@
 #include "menu.h"
 
 int main() {
-    int action, run=1;
+    int action;
     print_menu();
-    while (run==1) {
+    while (1) {
         printf("> Select action: ");
         scanf("%d", &action);
         switch (action) {
@@ -15,9 +15,8 @@ int main() {
             case 3: concat_strings(); break;
             case 4: get_substring(); break;
             case 5: find_substring(); break;
-            case 6: cleanup(); run=0; break;
+            case 6: cleanup(); return 0;
             default: printf("Wrong action\n");
         }
     }
-    return 0;
 }
